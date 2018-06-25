@@ -9,9 +9,10 @@
 
     <style>
         #map-canvas {
-
             height: 800px;
         }
+
+    .label{ color:#bada22; height: 40px; line-height: 50px; background-color:crimson; padding: 0; margin: 0}
 
     </style>
 </head>
@@ -23,7 +24,7 @@
 
 <script>
     "use strict";
-
+    var marker;
     function initMap() {
 
         var mapCanvas = document.getElementById('map-canvas');
@@ -48,19 +49,28 @@
 
     var inAndOut = {lat: 34.0689843, lng: -117.97507359999997};
 
-    var marker = new google.maps.Marker({
-
+    marker = new google.maps.Marker({
+        map: map,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
         position: inAndOut,
-        map: map
-    })
 
+
+
+    });
+
+    marker.addListener('click', function(){
 
         var infowindow = new google.maps.InfoWindow({
 
-            content: "The Original In N Out!"
-        })
+            content: "<div class='label'>The Original In N Out!</div>"
+        });
 
         infowindow.open(map, marker);
+    });
+
+
+
 
     }
 </script>
